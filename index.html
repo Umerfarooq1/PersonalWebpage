@@ -243,7 +243,7 @@
         <button class="close-btn" id="close-resume" aria-label="Close resume">Close</button>
       </div>
       <div class="modal-body">
-        <iframe src="/resume.pdf" title="Umer résumé PDF"></iframe>
+        <iframe src="/resume.pdf" title="Umer's Resume PDF"></iframe>
       </div>
     </div>
   </div>
@@ -283,10 +283,15 @@
     function openResume(){
       resumeModal.classList.add('open');
       resumeModal.setAttribute('aria-hidden','false');
+      // Set browser tab title while resume is open
+      if(!document._originalTitle){ document._originalTitle = document.title; }
+      document.title = "Umer's Resume";
     }
     function closeResume(){
       resumeModal.classList.remove('open');
       resumeModal.setAttribute('aria-hidden','true');
+      // Restore original tab title
+      if(document._originalTitle){ document.title = document._originalTitle; }
     }
 
     openResumeBtn?.addEventListener('click',e=>{e.preventDefault();openResume();});
