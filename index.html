@@ -80,6 +80,16 @@
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
     }
+    /* On-scroll animations */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in-view{opacity:1;transform:none}
+    .underline{background-image:linear-gradient(var(--blue-600),var(--blue-600));background-position:0 100%;background-repeat:no-repeat;background-size:0% 2px;transition:background-size .6s ease}
+    .underline.in-view{background-size:100% 2px}
+
+    /* Word-by-word entrance */
+    .words span{display:inline-block;opacity:0;transform:translateY(8px)}
+    .words span.show{opacity:1;transform:none;transition:opacity .45s ease,transform .45s ease}
+
   </style>
 </head>
 <body>
@@ -240,5 +250,35 @@
     // Year
     document.getElementById('y').textContent=new Date().getFullYear();
   </script>
+
+  <script>
+    // Keep your existing mobile toggle + year code...
+
+    // Intersection Observer for on-scroll animations
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+
+        // Word-by-word stagger
+          if(entry.target.dataset && entry.target.dataset.words!==undefined){
+            const words=entry.target.textContent.trim().split(/\s+/);
+            entry.target.textContent='';
+            words.forEach((w,i)=>{
+            const span=document.createElement('span');
+            span.textContent=w+' ';
+            entry.target.appendChild(span);
+            setTimeout(()=>span.classList.add('show'), i*65);
+            });
+          }
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.2});
+
+    // Observe headings, cards, and word-by-word paragraphs
+    document.querySelectorAll('.underline, .reveal, .words[data-words]')
+      .forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
