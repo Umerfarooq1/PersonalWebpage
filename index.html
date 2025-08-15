@@ -83,7 +83,17 @@
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
     }
-  </style>
+    /* Resume modal */
+    .modal{position:fixed;inset:0;background:rgba(14,76,146,.3);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+    .modal.open{display:flex}
+    .modal-card{background:var(--white);border:1px solid var(--blue-100);border-radius:16px;box-shadow:var(--shadow);max-width:1000px;width:100%;height:80vh;display:flex;flex-direction:column;overflow:hidden}
+    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--blue-100)}
+    .modal-header b{color:var(--blue-900)}
+    .modal-body{flex:1}
+    .modal-body iframe{border:0;width:100%;height:100%}
+    .close-btn{background:transparent;border:2px solid var(--blue-700);color:var(--blue-700);padding:6px 10px;border-radius:10px;font-weight:700}
+    .close-btn:hover{background:var(--blue-100)}
+</style>
 </head>
 <body>
   <!-- Header -->
@@ -100,7 +110,7 @@
           <a href="#projects" role="menuitem">Projects</a>
           <a href="#experience" role="menuitem">Experience</a>
           <a href="#contact" role="menuitem">Contact</a>
-          <a class="btn ghost" href="/resume.pdf" target="_blank" rel="noopener" role="menuitem" aria-label="Open resume PDF">Résumé</a>
+          <a id="open-resume" class="btn ghost" href="#resume" role="menuitem" aria-label="Open resume">Résumé</a>
         </div>
       </nav>
     </div>
@@ -225,6 +235,19 @@
     </div>
   </section>
 
+  <!-- Resume Modal -->
+  <div id="resume-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="resumeTitle" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <b id="resumeTitle">Résumé</b>
+        <button class="close-btn" id="close-resume" aria-label="Close resume">Close</button>
+      </div>
+      <div class="modal-body">
+        <iframe src="/resume.pdf" title="Umer résumé PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <div class="wrap" id="resume">
@@ -251,6 +274,25 @@
     },{threshold:0.15});
 
     document.querySelectorAll('.reveal, .underline').forEach(el=>observer.observe(el));
+
+    // Resume modal logic
+    const resumeModal=document.getElementById('resume-modal');
+    const openResumeBtn=document.getElementById('open-resume');
+    const closeResumeBtn=document.getElementById('close-resume');
+
+    function openResume(){
+      resumeModal.classList.add('open');
+      resumeModal.setAttribute('aria-hidden','false');
+    }
+    function closeResume(){
+      resumeModal.classList.remove('open');
+      resumeModal.setAttribute('aria-hidden','true');
+    }
+
+    openResumeBtn?.addEventListener('click',e=>{e.preventDefault();openResume();});
+    closeResumeBtn?.addEventListener('click',closeResume);
+    resumeModal?.addEventListener('click',e=>{ if(e.target===resumeModal) closeResume(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape' && resumeModal.classList.contains('open')) closeResume(); });
   </script>
 </body>
 </html>
