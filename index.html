@@ -8,10 +8,10 @@
   <meta name="theme-color" content="#0E4C92" />
   <style>
     :root{
-      --blue-900:#0E4C92;  /* deep blue for text */
-      --blue-700:#0E4C92;  /* primary */
-      --blue-600:#1465bf;  /* hover/accent */
-      --blue-100:#e8f0ff;  /* light tint */
+      --blue-900:#0E4C92;
+      --blue-700:#0E4C92;
+      --blue-600:#1465bf;
+      --blue-100:#e6f0fb;
       --white:#ffffff;
       --maxw:1100px;
       --radius:16px;
@@ -24,7 +24,7 @@
     a:focus,button:focus{outline:3px solid var(--blue-600);outline-offset:2px}
     .wrap{max-width:var(--maxw);margin:auto;padding:0 20px}
 
-    /* Scroll-triggered animations */
+    /* Animations */
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
     .reveal.in-view{opacity:1;transform:none}
     .underline{background-image:linear-gradient(var(--blue-600),var(--blue-600));background-position:0 100%;background-repeat:no-repeat;background-size:0% 3px;transition:background-size .6s ease}
@@ -82,7 +82,6 @@
     }
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
-      .reveal{transition:none}
     }
   </style>
 </head>
@@ -99,10 +98,9 @@
         <div id="menu" class="menu" role="menubar">
           <a href="#about" role="menuitem">About</a>
           <a href="#projects" role="menuitem">Projects</a>
-          <a href="#education" role="menuitem">Education</a>
           <a href="#experience" role="menuitem">Experience</a>
           <a href="#contact" role="menuitem">Contact</a>
-          <a class="btn ghost" href="#resume" role="menuitem" aria-label="Download resume">Résumé</a>
+          <a class="btn ghost" href="/resume.pdf" target="_blank" rel="noopener" role="menuitem" aria-label="Open resume PDF">Résumé</a>
         </div>
       </nav>
     </div>
@@ -120,11 +118,11 @@
           <a class="btn ghost" href="#contact">Get in touch</a>
         </div>
       </div>
-      <aside class="hero-card reveal">
+      <aside class="hero-card">
         <h2 style="margin:0 0 8px">Currently</h2>
         <ul style="margin:0;padding-left:18px">
           <li>PhD researcher at Texas A&M</li>
-          <li>Studying AI tools for self-regulated learning</li>
+          <li>Studying AI tools for self‑regulated learning</li>
           <li>Open to Summer 2026 internships</li>
         </ul>
       </aside>
@@ -180,30 +178,11 @@
         <article class="card reveal">
           <h3>SRL Instrument</h3>
           <p class="meta">Measuring effectiveness of AI tools</p>
-          <p>Design and validation of a new instrument for self-regulated learning support.</p>
+          <p>Design and validation of a new instrument for self‑regulated learning support.</p>
           <div class="chips">
             <span class="chip">Psychometrics</span><span class="chip">EFA/CFA</span>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="reveal">
-    <div class="wrap">
-      <h2 class="section-title underline">Education</h2>
-      <div class="grid cols-2">
-        <div class="card reveal">
-          <h3>PhD, Interdisciplinary Engineering</h3>
-          <p class="meta">Texas A&M University · 2023 — Present</p>
-          <p>Research focus on AI tools for self regulated learning, instrument design, and data informed instruction.</p>
-        </div>
-        <div class="card reveal">
-          <h3>BSc, Electrical Engineering</h3>
-          <p class="meta">Example University · 2013 — 2017</p>
-          <p>Capstone on embedded systems. Graduated with honors and a love for clean blue and white interfaces.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -214,19 +193,19 @@
       <h2 class="section-title underline">Experience</h2>
       <div class="grid cols-2">
         <div class="card reveal">
-          <h3>TEX-E — Analyst Intern</h3>
+          <h3>TEX‑E — Analyst Intern</h3>
           <p class="meta">Summer 2025</p>
           <ul>
             <li>Built Salesforce reports and dashboards to streamline operations.</li>
-            <li>Cleaned and reconciled multi-year event and fellow data.</li>
-            <li>Created QR-based tracking flows for outreach campaigns.</li>
+            <li>Cleaned and reconciled multi‑year event and fellow data.</li>
+            <li>Created QR‑based tracking flows for outreach campaigns.</li>
           </ul>
         </div>
         <div class="card reveal">
           <h3>Graduate Researcher — Texas A&M</h3>
           <p class="meta">2023 — Present</p>
           <ul>
-            <li>Studying AI-assisted learning in engineering education.</li>
+            <li>Studying AI‑assisted learning in engineering education.</li>
             <li>Developing a validated measure for SRL support by AI tools.</li>
             <li>Published and presented at ASEE & FIE.</li>
           </ul>
@@ -254,18 +233,14 @@
   </footer>
 
   <script>
-    // Mobile menu toggle
     const toggle=document.querySelector('.menu-toggle');
     const menu=document.getElementById('menu');
     toggle?.addEventListener('click',()=>{
       const open=menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true':'false');
     });
-
-    // Year
     document.getElementById('y').textContent=new Date().getFullYear();
 
-    // Intersection Observer for animations
     const observer=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -275,9 +250,7 @@
       });
     },{threshold:0.15});
 
-    // Observe headings and content blocks
     document.querySelectorAll('.reveal, .underline').forEach(el=>observer.observe(el));
   </script>
 </body>
 </html>
-
