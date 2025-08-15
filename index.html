@@ -1,22 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta name="theme-color" content="#0E4C92" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Umer | Personal Website</title>
   <meta name="description" content="Personal website and portfolio for Umer. Responsive, fast, and minimal." />
-  <meta name="theme-color" content="#0a4dd7" />
+  <meta name="theme-color" content="#0E4C92" />
   <style>
     :root{
-      --blue-900:#08386d;   /* deep blue */
-      --blue-700:#0E4C92;   /* primary */
-      --blue-600:#1360b8;   /* hover */
-      --blue-100:#e6f0fb;   /* light tint */
+      --blue-900:#0E4C92;  /* deep blue for text */
+      --blue-700:#0E4C92;  /* primary */
+      --blue-600:#1465bf;  /* hover/accent */
+      --blue-100:#e8f0ff;  /* light tint */
       --white:#ffffff;
       --maxw:1100px;
       --radius:16px;
-      --shadow:0 6px 24px rgba(10,45,215,.12);
+      --shadow:0 6px 24px rgba(14,76,146,.12);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -24,6 +23,12 @@
     a{color:var(--blue-700);text-decoration:none}
     a:focus,button:focus{outline:3px solid var(--blue-600);outline-offset:2px}
     .wrap{max-width:var(--maxw);margin:auto;padding:0 20px}
+
+    /* Scroll-triggered animations */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in-view{opacity:1;transform:none}
+    .underline{background-image:linear-gradient(var(--blue-600),var(--blue-600));background-position:0 100%;background-repeat:no-repeat;background-size:0% 3px;transition:background-size .6s ease}
+    .underline.in-view{background-size:100% 3px}
 
     /* Header */
     header{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--blue-100);z-index:50}
@@ -75,21 +80,10 @@
       .grid.cols-3{grid-template-columns:repeat(3,1fr)}
       .grid.cols-2{grid-template-columns:repeat(2,1fr)}
     }
-
-    /* Motion reduce */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
+      .reveal{transition:none}
     }
-    /* On-scroll animations */
-    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.in-view{opacity:1;transform:none}
-    .underline{background-image:linear-gradient(var(--blue-600),var(--blue-600));background-position:0 100%;background-repeat:no-repeat;background-size:0% 2px;transition:background-size .6s ease}
-    .underline.in-view{background-size:100% 2px}
-
-    /* Word-by-word entrance */
-    .words span{display:inline-block;opacity:0;transform:translateY(8px)}
-    .words span.show{opacity:1;transform:none;transition:opacity .45s ease,transform .45s ease}
-
   </style>
 </head>
 <body>
@@ -105,6 +99,7 @@
         <div id="menu" class="menu" role="menubar">
           <a href="#about" role="menuitem">About</a>
           <a href="#projects" role="menuitem">Projects</a>
+          <a href="#education" role="menuitem">Education</a>
           <a href="#experience" role="menuitem">Experience</a>
           <a href="#contact" role="menuitem">Contact</a>
           <a class="btn ghost" href="#resume" role="menuitem" aria-label="Download resume">Résumé</a>
@@ -114,7 +109,7 @@
   </header>
 
   <!-- Hero -->
-  <main id="home" class="wrap hero">
+  <main id="home" class="wrap hero reveal">
     <div class="hero-grid">
       <div>
         <span class="tag">Hello, I am Umer</span>
@@ -125,11 +120,11 @@
           <a class="btn ghost" href="#contact">Get in touch</a>
         </div>
       </div>
-      <aside class="hero-card" aria-label="Quick facts">
+      <aside class="hero-card reveal">
         <h2 style="margin:0 0 8px">Currently</h2>
         <ul style="margin:0;padding-left:18px">
           <li>PhD researcher at Texas A&M</li>
-          <li>Studying AI tools for self‑regulated learning</li>
+          <li>Studying AI tools for self-regulated learning</li>
           <li>Open to Summer 2026 internships</li>
         </ul>
       </aside>
@@ -137,15 +132,15 @@
   </main>
 
   <!-- About -->
-  <section id="about">
+  <section id="about" class="reveal">
     <div class="wrap">
-      <h2 class="section-title">About</h2>
+      <h2 class="section-title underline">About</h2>
       <div class="grid cols-2">
-        <div class="card">
+        <div class="card reveal">
           <p>I like solving real problems with simple, reliable software. My current research focuses on how AI tools support student learning in engineering classrooms.</p>
           <p>Outside research, I tinker with dashboards, automate workflows, and design minimal interfaces in white and blue.</p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Skills</h3>
           <div class="chips">
             <span class="chip">Python</span>
@@ -162,11 +157,11 @@
   </section>
 
   <!-- Projects -->
-  <section id="projects">
+  <section id="projects" class="reveal">
     <div class="wrap">
-      <h2 class="section-title">Projects</h2>
+      <h2 class="section-title underline">Projects</h2>
       <div class="grid cols-3">
-        <article class="card">
+        <article class="card reveal">
           <h3>Project Atlas</h3>
           <p class="meta">Analytics toolkit for course dashboards</p>
           <p>Lightweight pipeline that pulls LMS data and builds shareable insights for instructors.</p>
@@ -174,7 +169,7 @@
             <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Plotly</span>
           </div>
         </article>
-        <article class="card">
+        <article class="card reveal">
           <h3>FossilSketch</h3>
           <p class="meta">Active learning app for micropaleontology</p>
           <p>Interactive practice modules with instant feedback and exportable progress reports.</p>
@@ -182,10 +177,10 @@
             <span class="chip">React</span><span class="chip">Node</span><span class="chip">MongoDB</span>
           </div>
         </article>
-        <article class="card">
+        <article class="card reveal">
           <h3>SRL Instrument</h3>
           <p class="meta">Measuring effectiveness of AI tools</p>
-          <p>Design and validation of a new instrument for self‑regulated learning support.</p>
+          <p>Design and validation of a new instrument for self-regulated learning support.</p>
           <div class="chips">
             <span class="chip">Psychometrics</span><span class="chip">EFA/CFA</span>
           </div>
@@ -194,25 +189,44 @@
     </div>
   </section>
 
-  <!-- Experience -->
-  <section id="experience">
+  <!-- Education -->
+  <section id="education" class="reveal">
     <div class="wrap">
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title underline">Education</h2>
       <div class="grid cols-2">
-        <div class="card">
-          <h3>TEX‑E — Analyst Intern</h3>
+        <div class="card reveal">
+          <h3>PhD, Interdisciplinary Engineering</h3>
+          <p class="meta">Texas A&M University · 2023 — Present</p>
+          <p>Research focus on AI tools for self regulated learning, instrument design, and data informed instruction.</p>
+        </div>
+        <div class="card reveal">
+          <h3>BSc, Electrical Engineering</h3>
+          <p class="meta">Example University · 2013 — 2017</p>
+          <p>Capstone on embedded systems. Graduated with honors and a love for clean blue and white interfaces.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="reveal">
+    <div class="wrap">
+      <h2 class="section-title underline">Experience</h2>
+      <div class="grid cols-2">
+        <div class="card reveal">
+          <h3>TEX-E — Analyst Intern</h3>
           <p class="meta">Summer 2025</p>
           <ul>
             <li>Built Salesforce reports and dashboards to streamline operations.</li>
-            <li>Cleaned and reconciled multi‑year event and fellow data.</li>
-            <li>Created QR‑based tracking flows for outreach campaigns.</li>
+            <li>Cleaned and reconciled multi-year event and fellow data.</li>
+            <li>Created QR-based tracking flows for outreach campaigns.</li>
           </ul>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Graduate Researcher — Texas A&M</h3>
           <p class="meta">2023 — Present</p>
           <ul>
-            <li>Studying AI‑assisted learning in engineering education.</li>
+            <li>Studying AI-assisted learning in engineering education.</li>
             <li>Developing a validated measure for SRL support by AI tools.</li>
             <li>Published and presented at ASEE & FIE.</li>
           </ul>
@@ -222,10 +236,10 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact">
+  <section id="contact" class="reveal">
     <div class="wrap">
-      <h2 class="section-title">Contact</h2>
-      <div class="card">
+      <h2 class="section-title underline">Contact</h2>
+      <div class="card reveal">
         <p>Have a project, a role, or a question? I would love to chat.</p>
         <p>Email: <a href="mailto:hello@example.com">hello@example.com</a> · LinkedIn: <a href="#">/in/umer</a> · GitHub: <a href="#">@umer</a></p>
       </div>
@@ -247,38 +261,22 @@
       const open=menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true':'false');
     });
+
     // Year
     document.getElementById('y').textContent=new Date().getFullYear();
-  </script>
 
-  <script>
-    // Keep your existing mobile toggle + year code...
-
-    // Intersection Observer for on-scroll animations
-    const io=new IntersectionObserver((entries)=>{
+    // Intersection Observer for animations
+    const observer=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
           entry.target.classList.add('in-view');
-
-        // Word-by-word stagger
-          if(entry.target.dataset && entry.target.dataset.words!==undefined){
-            const words=entry.target.textContent.trim().split(/\s+/);
-            entry.target.textContent='';
-            words.forEach((w,i)=>{
-            const span=document.createElement('span');
-            span.textContent=w+' ';
-            entry.target.appendChild(span);
-            setTimeout(()=>span.classList.add('show'), i*65);
-            });
-          }
-          io.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
-    },{threshold:0.2});
+    },{threshold:0.15});
 
-    // Observe headings, cards, and word-by-word paragraphs
-    document.querySelectorAll('.underline, .reveal, .words[data-words]')
-      .forEach(el=>io.observe(el));
-</script>
+    // Observe headings and content blocks
+    document.querySelectorAll('.reveal, .underline').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
